@@ -62,13 +62,13 @@ By default this command will place you in ```/home/vagrant/``` home directory.
 Once in the VM run the following command to format the filesystem for Hadoop
 
 ```
-$ hdfs namenode -format
+[vagrant@vagrant-hadoop-centos7 ~]$ hdfs namenode -format
 ```
 
 Now start the NameNode daemon and the DataNode daemon
 
 ```
-$ start-dfs.sh
+[vagrant@vagrant-hadoop-centos7 ~]$ start-dfs.sh
 ```
 
 ## Start YARN
@@ -76,7 +76,7 @@ $ start-dfs.sh
 Start YARN by running the following command:
 
 ```
-$ start-yarn.sh
+[vagrant@vagrant-hadoop-centos7 ~]$ start-yarn.sh
 ```
 
 ## Testing
