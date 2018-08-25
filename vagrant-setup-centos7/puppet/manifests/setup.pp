@@ -8,7 +8,8 @@ class systemUpdate{
     timeout => 0
   }
   $sysPackages = [
-    "wget"
+    "wget",
+    "telnet"
   ]
   package {$sysPackages:
     ensure => "installed",
@@ -44,6 +45,22 @@ class hadoop{
     command => 'tar -zxvf hadoop-2.7.7.tar.gz',
     cwd => '/home/vagrant',
     creates => '/home/vagrant/hadoop-2.7.7',
+    user => vagrant
+  }
+}
+
+class zookeeper{
+  exec{'download zookeeper':
+    command => 'wget http://apache.mirror.colo-serv.net/zookeeper/zookeeper-3.4.13/zookeeper-3.4.13.tar.gz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/zookeeper-3.4.13.tar.gz',
+    user => vagrant,
+    timeout => 0
+  } ->
+  exec{'untar zookeeper':
+    command => 'tar -zxvf zookeeper-3.4.13.tar.gz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/zookeeper-3.4.13',
     user => vagrant
   }
 }
@@ -107,22 +124,33 @@ class hadoopConfig{
   }
 }
 
+class zookeeperConfig{
+  file{'/home/vagrant/zookeeper-3.4.13/conf/zoo.cfg':
+    ensure => 'file',
+    source => '/home/vagrant/zookeeper-3.4.13/conf/zoo_sample.cfg'
+  }
+}
+
 class devSetup{
   include systemUpdate
   include java
   include hadoop
+  include zookeeper
   include sshKeyGen
   include timezone
   include env
   include hadoopConfig
+  include zookeeperConfig
   
   Class[systemUpdate]
   -> Class[java]
   -> Class[hadoop]
+  -> Class[zookeeper]
   -> Class[sshKeyGen]
   -> Class[timezone]
   -> Class[env]
   -> Class[hadoopConfig]
+  -> Class[zookeeperConfig]
 }
 
 include devSetup
