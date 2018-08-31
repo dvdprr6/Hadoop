@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <property>
+    <name>hive.metastore.warehouse.dir</name>
+    <value>/user/hive/warehouse</value>
+    <description>
+    Local (for local setup) or HDFS (for distributed or pseudo-distributed setup)
+    directory where Hive keeps table contents.
+    </description>
+  </property>
+  <property>
+    <name>hive.metastore.local</name>
+    <value>true</value>
+    <description>
+    Use false if a production metastore server is used.
+    </description>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionURL</name>
+    <value>jdbc:derby:;databaseName=/home/vagrant/apache-hive-1.2.2-bin/metastore_db;create=true</value>
+    <description>
+    The JDBC connection URL. This uses a local Derby server that takes
+    /root/opt/data/hive/metastore_db path for its data storage.
+    </description>
+  </property>
+</configuration>
