@@ -65,6 +65,22 @@ class zookeeper{
   }
 }
 
+class hive{
+  exec{'download hive':
+    command => 'wget http://archive.apache.org/dist/hive/stable/apache-hive-1.2.2-bin.tar.gz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/apache-hive-1.2.2-bin.tar.gz',
+    user => vagrant,
+    timeout => 0
+  } ->
+  exec{'untar hive':
+    command => 'tar -zxvf apache-hive-1.2.2-bin.tar.gz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/apache-hive-1.2.2-bin',
+    user => vagrant
+  }
+}
+
 class sshKeyGen{
   exec{'generate rsa':
     command => 'ssh-keygen -t rsa -P "" -f /home/vagrant/.ssh/id_rsa',
@@ -131,26 +147,37 @@ class zookeeperConfig{
   }
 }
 
+class hiveConfig{
+  file{'/home/vagrant/apache-hive-1.2.2-bin/conf/hive-site.xml':
+    ensure => 'file',
+    source => '/vagrant/conf/hive-site.xml'
+  }
+}
+
 class devSetup{
   include systemUpdate
   include java
   include hadoop
   include zookeeper
+  include hive
   include sshKeyGen
   include timezone
   include env
   include hadoopConfig
   include zookeeperConfig
+  include hiveConfig
   
   Class[systemUpdate]
   -> Class[java]
   -> Class[hadoop]
   -> Class[zookeeper]
+  -> Class[hive]
   -> Class[sshKeyGen]
   -> Class[timezone]
   -> Class[env]
   -> Class[hadoopConfig]
   -> Class[zookeeperConfig]
+  -> Class[hiveConfig]
 }
 
 include devSetup
