@@ -9,7 +9,8 @@ class systemUpdate{
   }
   $sysPackages = [
     "wget",
-    "telnet"
+    "telnet",
+    "unzip"
   ]
   package {$sysPackages:
     ensure => "installed",
@@ -67,16 +68,16 @@ class zookeeper{
 
 class hive{
   exec{'download hive':
-    command => 'wget http://archive.apache.org/dist/hive/stable/apache-hive-1.2.2-bin.tar.gz',
+    command => 'wget http://archive.apache.org/dist/hive/hive-2.3.3/apache-hive-2.3.3-bin.tar.gz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/apache-hive-1.2.2-bin.tar.gz',
+    creates => '/home/vagrant/apache-hive-2.3.3-bin.tar.gz',
     user => vagrant,
     timeout => 0
   } ->
   exec{'untar hive':
-    command => 'tar -zxvf apache-hive-1.2.2-bin.tar.gz',
+    command => 'tar -zxvf apache-hive-2.3.3-bin.tar.gz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/apache-hive-1.2.2-bin',
+    creates => '/home/vagrant/apache-hive-2.3.3-bin',
     user => vagrant
   }
 }
@@ -148,7 +149,7 @@ class zookeeperConfig{
 }
 
 class hiveConfig{
-  file{'/home/vagrant/apache-hive-1.2.2-bin/conf/hive-site.xml':
+  file{'/home/vagrant/apache-hive-2.3.3-bin/conf/hive-site.xml':
     ensure => 'file',
     source => '/vagrant/conf/hive-site.xml'
   }
