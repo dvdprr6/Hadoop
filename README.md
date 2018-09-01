@@ -79,6 +79,26 @@ Start YARN by running the following command:
 [vagrant@vagrant-hadoop-centos7 ~]$ start-yarn.sh
 ```
 
+## Create HDFS Home Directory
+We need a place to put our data on HDFS, this directory is not created by default and this is the directory HDFS will look into to find data:
+
+```
+[vagrant@vagrant-hadoop-centos7 ~]$ hadoop fs -mkdir -p /user/vagrant
+```
+## Create Hive Home Directory on HDFS
+We need a place to store the metadata and/or data for Hive, create this directory on the HDFS
+
+```
+[vagrant@vagrant-hadoop-centos7 ~]$ hadoop fs -mkdir -p /user/hive/warehouse
+```
+
+## Configure Hive
+In Hive version 2.3.3 we need to initialize derby by running this command:
+
+```
+[vagrant@vagrant-hadoop-centos7 ~]$ schematool -initSchema -dbType derby
+```
+
 ## Testing
 
 At this point navigate your browser to http://vagrant-hadoop-centos7:50070 and verify Hadoop's Dashboard is dispayed. Go to the Datanodes tab and verify that one datanode it active in the Datanode usage histogram
