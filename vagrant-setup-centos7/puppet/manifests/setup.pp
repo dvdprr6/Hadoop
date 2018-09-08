@@ -8,12 +8,12 @@ class systemUpdate{
     timeout => 0
   }
   $sysPackages = [
-    "wget",
-    "telnet",
-    "unzip"
+    'wget',
+    'telnet',
+    'unzip'
   ]
   package {$sysPackages:
-    ensure => "installed",
+    ensure => 'installed',
     require => Exec['yum update']
   }
 }
@@ -119,6 +119,10 @@ class env{
     command => 'cat /vagrant/env/envVariables >> /home/vagrant/.bashrc',
     cwd => '/home/vagrant',
     user => vagrant
+  } ->
+  file{'/home/vagrant/.hiverc':
+     ensure => 'file',
+     source => '/vagrant/env/.hiverc'
   }
 }
 

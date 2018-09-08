@@ -24,4 +24,8 @@
     /root/opt/data/hive/metastore_db path for its data storage.
     </description>
   </property>
+  <property>
+    <name>parquet.compression</name>
+    <value>SNAPPY</value>
+  </property>
 </configuration>
