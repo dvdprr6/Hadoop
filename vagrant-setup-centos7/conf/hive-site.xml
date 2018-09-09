@@ -28,4 +28,8 @@
     <name>parquet.compression</name>
     <value>SNAPPY</value>
   </property>
+  <property>
+    <name>hive.mapred.mode</name>
+    <value>true</value>
+  </property>
 </configuration>
