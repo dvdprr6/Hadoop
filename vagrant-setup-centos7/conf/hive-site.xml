@@ -32,4 +32,8 @@
     <name>hive.mapred.mode</name>
     <value>true</value>
   </property>
+  <property>
+    <name>hive.exec.dynamic.partition.mode</name>
+    <value>nonstrict</value>
+  </property>
 </configuration>
