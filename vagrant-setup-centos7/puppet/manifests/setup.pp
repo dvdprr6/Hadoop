@@ -82,6 +82,22 @@ class hive{
   }
 }
 
+class hbase{
+  exec{'download hbase':
+    command => 'wget http://mirror.its.dal.ca/apache/hbase/2.1.0/hbase-2.1.0-bin.tar.gz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/hbase-2.1.0-bin.tar.gz',
+    user => vagrant,
+    timeout => 0
+   } ->
+   exec{'untar hbase':
+    command => 'tar -zxvf hbase-2.1.0-bin.tar.gz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/hbase-2.1.0',
+    user => vagrant
+  }
+}
+
 class sshKeyGen{
   exec{'generate rsa':
     command => 'ssh-keygen -t rsa -P "" -f /home/vagrant/.ssh/id_rsa',
@@ -159,30 +175,41 @@ class hiveConfig{
   }
 }
 
+class hbaseConfig{
+  file{'/home/vagrant/hbase-2.1.0/conf/hbase-site.xml':
+    ensure => 'file',
+    source => '/vagrant/conf/hbase-site.xml'
+  }
+}
+
 class devSetup{
   include systemUpdate
   include java
   include hadoop
   include zookeeper
   include hive
+  include hbase
   include sshKeyGen
   include timezone
   include env
   include hadoopConfig
   include zookeeperConfig
   include hiveConfig
+  include hbaseConfig
   
   Class[systemUpdate]
   -> Class[java]
   -> Class[hadoop]
   -> Class[zookeeper]
   -> Class[hive]
+  -> Class[hbase]
   -> Class[sshKeyGen]
   -> Class[timezone]
   -> Class[env]
   -> Class[hadoopConfig]
   -> Class[zookeeperConfig]
   -> Class[hiveConfig]
+  -> Class[hbaseConfig]
 }
 
 include devSetup
