@@ -98,6 +98,20 @@ In Hive version 2.3.3 we need to initialize derby by running this command:
 ```
 [vagrant@vagrant-hadoop-centos7 ~]$ schematool -initSchema -dbType derby
 ```
+## Start Zookeeper
+Start Zookeeper by running the following command:
+
+```
+[vagrant@vagrant-hadoop-centos7 ~]$ zkServer.sh start
+```
+
+## Zookeeper CLI
+To access Zookeeper's CLU run the following command:
+
+```
+[vagrant@vagrant-hadoop-centos7 ~]$ zkCli.sh
+```
+
 ## Start HBase
 
 Start HBase by running the following command:
