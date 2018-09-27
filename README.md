@@ -120,6 +120,13 @@ Start HBase by running the following command:
 [vagrant@vagrant-hadoop-centos7 ~]$ start-hbase.sh
 ```
 
+## Start Kafka
+Start Kafka by running the following command:
+
+```
+[vagrant@vagrant-hadoop-centos7 ~]$ kafka-server-start.sh $KAFKA_HOME/config/server.properties
+```
+
 ## Testing
 
 At this point navigate your browser to http://vagrant-hadoop-centos7:50070 and verify Hadoop's Dashboard is dispayed. Go to the Datanodes tab and verify that one datanode it active in the Datanode usage histogram
@@ -132,4 +139,5 @@ Now your VM is ready to use Hadoop!
 - Vagrant Documentation: https://www.vagrantup.com/docs/index.html
 - Hadoop Quick Installation guide: https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation
 - Hadoop Download link: http://www.apache.org/dyn/closer.cgi/hadoop/common
+- Kafka Documentation: https://kafka.apache.org/
 
