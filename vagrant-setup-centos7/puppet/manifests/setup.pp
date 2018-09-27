@@ -98,6 +98,22 @@ class hbase{
   }
 }
 
+class kafka{
+  exec{'download kafka':
+    command => 'wget http://apache.mirror.rafal.ca/kafka/2.0.0/kafka_2.11-2.0.0.tgz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/kafka_2.11-2.0.0.tgz',
+    user => vagrant,
+    timeout => 0
+  } ->
+  exec{'untar kafka':
+    command => 'tar -zxvf kafka_2.11-2.0.0.tgz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/kafka_2.11-2.0.0',
+    user => vagrant
+  }
+}
+
 class sshKeyGen{
   exec{'generate rsa':
     command => 'ssh-keygen -t rsa -P "" -f /home/vagrant/.ssh/id_rsa',
@@ -189,6 +205,7 @@ class devSetup{
   include zookeeper
   include hive
   include hbase
+  include kafka
   include sshKeyGen
   include timezone
   include env
@@ -203,6 +220,7 @@ class devSetup{
   -> Class[zookeeper]
   -> Class[hive]
   -> Class[hbase]
+  -> Class[kafka]
   -> Class[sshKeyGen]
   -> Class[timezone]
   -> Class[env]
