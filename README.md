@@ -121,10 +121,14 @@ Start HBase by running the following command:
 ```
 
 ## Start Kafka
-Start Kafka by running the following command:
+Start Kafka kafka brokers by running the following command:
 
 ```
-[vagrant@vagrant-hadoop-centos7 ~]$ kafka-server-start.sh $KAFKA_HOME/config/server.properties
+[vagrant@vagrant-hadoop-centos7 ~]$ kafka-server-start.sh $KAFKA_HOME/config/server-0.properties
+```
+
+```
+[vagrant@vagrant-hadoop-centos7 ~]$ kafka-server-start.sh $KAFKA_HOME/config/server-1.properties
 ```
 
 ## Testing
