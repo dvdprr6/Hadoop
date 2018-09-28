@@ -198,6 +198,17 @@ class hbaseConfig{
   }
 }
 
+class kafkaConfig{
+  file{'/home/vagrant/kafka_2.11-2.0.0/config/server-0.properties':
+    ensure => 'file',
+    source => '/vagrant/conf/server-0.properties'
+  } ->
+  file{'/home/vagrant/kafka_2.11-2.0.0/config/server-1.properties':
+    ensure => 'file',
+    source => '/vagrant/conf/server-1.properties'
+  }
+}
+
 class devSetup{
   include systemUpdate
   include java
@@ -213,6 +224,7 @@ class devSetup{
   include zookeeperConfig
   include hiveConfig
   include hbaseConfig
+  include kafkaConfig
   
   Class[systemUpdate]
   -> Class[java]
@@ -228,6 +240,7 @@ class devSetup{
   -> Class[zookeeperConfig]
   -> Class[hiveConfig]
   -> Class[hbaseConfig]
+  -> Class[kafkaConfig]
 }
 
 include devSetup
