@@ -114,6 +114,23 @@ class kafka{
   }
 }
 
+class confluent{
+  exec{'download confluent':
+    command => 'wget http://packages.confluent.io/archive/5.0/confluent-oss-5.0.0-2.11.tar.gz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/confluent-oss-5.0.0-2.11.tar.gz',
+    user => vagrant,
+    timeout => 0
+  } ->
+  exec{'untar kafka':
+    command => 'tar -zxvf confluent-oss-5.0.0-2.11.tar.gz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/confluent-5.0.0',
+    user => vagrant
+  }
+}
+
+
 class sshKeyGen{
   exec{'generate rsa':
     command => 'ssh-keygen -t rsa -P "" -f /home/vagrant/.ssh/id_rsa',
@@ -217,6 +234,7 @@ class devSetup{
   include hive
   include hbase
   include kafka
+  include confluent
   include sshKeyGen
   include timezone
   include env
@@ -233,6 +251,7 @@ class devSetup{
   -> Class[hive]
   -> Class[hbase]
   -> Class[kafka]
+  -> Class[confluent]
   -> Class[sshKeyGen]
   -> Class[timezone]
   -> Class[env]

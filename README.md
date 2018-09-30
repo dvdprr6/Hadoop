@@ -121,7 +121,7 @@ Start HBase by running the following command:
 ```
 
 ## Start Kafka
-Start Kafka kafka brokers by running the following command:
+Start Kafka brokers by running the following command:
 
 ```
 [vagrant@vagrant-hadoop-centos7 ~]$ kafka-server-start.sh $KAFKA_HOME/config/server-0.properties
@@ -129,6 +129,17 @@ Start Kafka kafka brokers by running the following command:
 
 ```
 [vagrant@vagrant-hadoop-centos7 ~]$ kafka-server-start.sh $KAFKA_HOME/config/server-1.properties
+```
+
+## Start Confluent
+Start Conlfuent by running these commands:
+
+```
+[vagrant@vagrant-hadoop-centos7 ~]$ cd /home/vagrant/confluent-5.0.0
+```
+
+```
+[vagrant@vagrant-hadoop-centos7 ~]$ bin/confluent start
 ```
 
 ## Testing
@@ -144,4 +155,5 @@ Now your VM is ready to use Hadoop!
 - Hadoop Quick Installation guide: https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation
 - Hadoop Download link: http://www.apache.org/dyn/closer.cgi/hadoop/common
 - Kafka Documentation: https://kafka.apache.org/
+- Confluent Quick Start Guide: https://docs.confluent.io/current/quickstart/cos-quickstart.html#cos-quickstart
 
