@@ -132,7 +132,7 @@ Start Kafka brokers by running the following command:
 ```
 
 ## Start Confluent
-Start Conlfuent by running these commands:
+Start Confluent by running these commands:
 
 ```
 [vagrant@vagrant-hadoop-centos7 ~]$ cd /home/vagrant/confluent-5.0.0
