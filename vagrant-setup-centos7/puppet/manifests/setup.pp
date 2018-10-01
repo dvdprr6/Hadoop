@@ -122,7 +122,7 @@ class confluent{
     user => vagrant,
     timeout => 0
   } ->
-  exec{'untar kafka':
+  exec{'untar confluent':
     command => 'tar -zxvf confluent-oss-5.0.0-2.11.tar.gz',
     cwd => '/home/vagrant',
     creates => '/home/vagrant/confluent-5.0.0',
