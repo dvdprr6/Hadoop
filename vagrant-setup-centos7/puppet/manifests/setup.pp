@@ -130,6 +130,22 @@ class confluent{
   }
 }
 
+class spark{
+  exec{'download spark':
+    command => 'wget https://archive.apache.org/dist/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/spark-2.2.0-bin-hadoop2.7.tgz',
+    user => vagrant,
+    timeout => 0
+  } ->
+  exec{'untar spark':
+    command => 'tar -zxvf spark-2.2.0-bin-hadoop2.7.tgz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/spark-2.2.0-bin-hadoop2.7',
+    user => vagrant
+  }
+}
+
 
 class sshKeyGen{
   exec{'generate rsa':
@@ -235,6 +251,7 @@ class devSetup{
   include hbase
   include kafka
   include confluent
+  include spark
   include sshKeyGen
   include timezone
   include env
@@ -252,6 +269,7 @@ class devSetup{
   -> Class[hbase]
   -> Class[kafka]
   -> Class[confluent]
+  -> Class[spark]
   -> Class[sshKeyGen]
   -> Class[timezone]
   -> Class[env]

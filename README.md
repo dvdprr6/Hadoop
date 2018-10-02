@@ -156,4 +156,5 @@ Now your VM is ready to use Hadoop!
 - Hadoop Download link: http://www.apache.org/dyn/closer.cgi/hadoop/common
 - Kafka Documentation: https://kafka.apache.org/
 - Confluent Quick Start Guide: https://docs.confluent.io/current/quickstart/cos-quickstart.html#cos-quickstart
+- Spark Quick Start Guide: https://spark.apache.org/docs/2.2.0/quick-start.html
 
