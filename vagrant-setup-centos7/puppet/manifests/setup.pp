@@ -20,16 +20,16 @@ class systemUpdate{
 
 class java{
   exec{'download java':
-    command => 'wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz',
+    command => 'wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/jdk-8u181-linux-x64.tar.gz',
+    creates => '/home/vagrant/jdk-8u201-linux-x64.tar.gz',
     user => vagrant,
     timeout => 0
   } ->
   exec{'untar java':
-    command => 'tar -zxvf jdk-8u181-linux-x64.tar.gz',
+    command => 'tar -zxvf jdk-8u201-linux-x64.tar.gz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/jdk1.8.0_181',
+    creates => '/home/vagrant/jdk1.8.0_201',
     user => vagrant
   }
 }
@@ -84,16 +84,16 @@ class hive{
 
 class hbase{
   exec{'download hbase':
-    command => 'wget http://mirror.its.dal.ca/apache/hbase/2.1.0/hbase-2.1.0-bin.tar.gz',
+    command => 'wget https://www.apache.org/dist/hbase/2.1.2/hbase-2.1.2-bin.tar.gz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/hbase-2.1.0-bin.tar.gz',
+    creates => '/home/vagrant/hbase-2.1.2-bin.tar.gz',
     user => vagrant,
     timeout => 0
    } ->
    exec{'untar hbase':
-    command => 'tar -zxvf hbase-2.1.0-bin.tar.gz',
+    command => 'tar -zxvf hbase-2.1.2-bin.tar.gz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/hbase-2.1.0',
+    creates => '/home/vagrant/hbase-2.1.2',
     user => vagrant
   }
 }
@@ -225,7 +225,7 @@ class hiveConfig{
 }
 
 class hbaseConfig{
-  file{'/home/vagrant/hbase-2.1.0/conf/hbase-site.xml':
+  file{'/home/vagrant/hbase-2.1.2/conf/hbase-site.xml':
     ensure => 'file',
     source => '/vagrant/conf/hbase-site.xml'
   }
