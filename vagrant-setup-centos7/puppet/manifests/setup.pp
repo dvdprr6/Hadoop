@@ -84,16 +84,16 @@ class hive{
 
 class hbase{
   exec{'download hbase':
-    command => 'wget https://www.apache.org/dist/hbase/2.1.2/hbase-2.1.2-bin.tar.gz',
+    command => 'wget https://www.apache.org/dist/hbase/2.1.3/hbase-2.1.3-bin.tar.gz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/hbase-2.1.2-bin.tar.gz',
+    creates => '/home/vagrant/hbase-2.1.3-bin.tar.gz',
     user => vagrant,
     timeout => 0
    } ->
    exec{'untar hbase':
-    command => 'tar -zxvf hbase-2.1.2-bin.tar.gz',
+    command => 'tar -zxvf hbase-2.1.3-bin.tar.gz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/hbase-2.1.2',
+    creates => '/home/vagrant/hbase-2.1.3',
     user => vagrant
   }
 }
@@ -142,6 +142,22 @@ class spark{
     command => 'tar -zxvf spark-2.2.0-bin-hadoop2.7.tgz',
     cwd => '/home/vagrant',
     creates => '/home/vagrant/spark-2.2.0-bin-hadoop2.7',
+    user => vagrant
+  }
+}
+
+class scala{
+  exec{'download scala':
+    command => 'https://downloads.lightbend.com/scala/2.12.8/scala-2.12.8.tgz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/scala-2.12.8.tgz',
+    user => vagrant,
+    timeout => 0
+  } ->
+  exec{'untar spark':
+    command => 'tar -zxvf scala-2.12.8.tgz',
+    cwd => '/home/vagrant',
+    creates => '/home/vagrant/scala-2.12.8',
     user => vagrant
   }
 }
@@ -225,7 +241,7 @@ class hiveConfig{
 }
 
 class hbaseConfig{
-  file{'/home/vagrant/hbase-2.1.2/conf/hbase-site.xml':
+  file{'/home/vagrant/hbase-2.1.3/conf/hbase-site.xml':
     ensure => 'file',
     source => '/vagrant/conf/hbase-site.xml'
   }
@@ -252,6 +268,7 @@ class devSetup{
   include kafka
   include confluent
   include spark
+  include scala
   include sshKeyGen
   include timezone
   include env
@@ -270,6 +287,7 @@ class devSetup{
   -> Class[kafka]
   -> Class[confluent]
   -> Class[spark]
+  -> Class[scala]
   -> Class[sshKeyGen]
   -> Class[timezone]
   -> Class[env]
