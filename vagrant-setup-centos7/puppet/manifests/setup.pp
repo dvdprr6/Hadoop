@@ -148,13 +148,13 @@ class spark{
 
 class scala{
   exec{'download scala':
-    command => 'https://downloads.lightbend.com/scala/2.12.8/scala-2.12.8.tgz',
+    command => 'wget https://downloads.lightbend.com/scala/2.12.8/scala-2.12.8.tgz',
     cwd => '/home/vagrant',
     creates => '/home/vagrant/scala-2.12.8.tgz',
     user => vagrant,
     timeout => 0
   } ->
-  exec{'untar spark':
+  exec{'untar scala':
     command => 'tar -zxvf scala-2.12.8.tgz',
     cwd => '/home/vagrant',
     creates => '/home/vagrant/scala-2.12.8',
