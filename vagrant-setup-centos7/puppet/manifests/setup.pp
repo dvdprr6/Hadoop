@@ -52,16 +52,16 @@ class hadoop{
 
 class zookeeper{
   exec{'download zookeeper':
-    command => 'wget http://apache.mirror.colo-serv.net/zookeeper/zookeeper-3.4.13/zookeeper-3.4.13.tar.gz',
+    command => 'wget http://apache.mirror.colo-serv.net/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/zookeeper-3.4.13.tar.gz',
+    creates => '/home/vagrant/zookeeper-3.4.14.tar.gz',
     user => vagrant,
     timeout => 0
   } ->
   exec{'untar zookeeper':
-    command => 'tar -zxvf zookeeper-3.4.13.tar.gz',
+    command => 'tar -zxvf zookeeper-3.4.14.tar.gz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/zookeeper-3.4.13',
+    creates => '/home/vagrant/zookeeper-3.4.14',
     user => vagrant
   }
 }
@@ -84,32 +84,32 @@ class hive{
 
 class hbase{
   exec{'download hbase':
-    command => 'wget https://www.apache.org/dist/hbase/2.1.3/hbase-2.1.3-bin.tar.gz',
+    command => 'wget https://www.apache.org/dist/hbase/2.1.4/hbase-2.1.4-bin.tar.gz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/hbase-2.1.3-bin.tar.gz',
+    creates => '/home/vagrant/hbase-2.1.4-bin.tar.gz',
     user => vagrant,
     timeout => 0
    } ->
    exec{'untar hbase':
-    command => 'tar -zxvf hbase-2.1.3-bin.tar.gz',
+    command => 'tar -zxvf hbase-2.1.4-bin.tar.gz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/hbase-2.1.3',
+    creates => '/home/vagrant/hbase-2.1.4',
     user => vagrant
   }
 }
 
 class kafka{
   exec{'download kafka':
-    command => 'wget http://apache.mirror.rafal.ca/kafka/2.0.0/kafka_2.11-2.0.0.tgz',
+    command => 'wget http://apache.mirror.rafal.ca/kafka/2.1.1/kafka_2.11-2.1.1.tgz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/kafka_2.11-2.0.0.tgz',
+    creates => '/home/vagrant/kafka_2.11-2.1.1.tgz',
     user => vagrant,
     timeout => 0
   } ->
   exec{'untar kafka':
-    command => 'tar -zxvf kafka_2.11-2.0.0.tgz',
+    command => 'tar -zxvf kafka_2.11-2.1.1.tgz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/kafka_2.11-2.0.0',
+    creates => '/home/vagrant/kafka_2.11-2.1.1',
     user => vagrant
   }
 }
@@ -132,16 +132,16 @@ class confluent{
 
 class spark{
   exec{'download spark':
-    command => 'wget https://archive.apache.org/dist/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz',
+    command => 'wget http://apache.mirror.colo-serv.net/spark/spark-2.4.1/spark-2.4.1-bin-hadoop2.7.tgz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/spark-2.2.0-bin-hadoop2.7.tgz',
+    creates => '/home/vagrant/spark-2.4.1-bin-hadoop2.7.tgz',
     user => vagrant,
     timeout => 0
   } ->
   exec{'untar spark':
-    command => 'tar -zxvf spark-2.2.0-bin-hadoop2.7.tgz',
+    command => 'tar -zxvf spark-2.4.1-bin-hadoop2.7.tgz',
     cwd => '/home/vagrant',
-    creates => '/home/vagrant/spark-2.2.0-bin-hadoop2.7',
+    creates => '/home/vagrant/spark-2.4.1-bin-hadoop2.7',
     user => vagrant
   }
 }
@@ -227,9 +227,9 @@ class hadoopConfig{
 }
 
 class zookeeperConfig{
-  file{'/home/vagrant/zookeeper-3.4.13/conf/zoo.cfg':
+  file{'/home/vagrant/zookeeper-3.4.14/conf/zoo.cfg':
     ensure => 'file',
-    source => '/home/vagrant/zookeeper-3.4.13/conf/zoo_sample.cfg'
+    source => '/home/vagrant/zookeeper-3.4.14/conf/zoo_sample.cfg'
   }
 }
 
@@ -241,18 +241,18 @@ class hiveConfig{
 }
 
 class hbaseConfig{
-  file{'/home/vagrant/hbase-2.1.3/conf/hbase-site.xml':
+  file{'/home/vagrant/hbase-2.1.4/conf/hbase-site.xml':
     ensure => 'file',
     source => '/vagrant/conf/hbase-site.xml'
   }
 }
 
 class kafkaConfig{
-  file{'/home/vagrant/kafka_2.11-2.0.0/config/server-0.properties':
+  file{'/home/vagrant/kafka_2.11-2.1.1/config/server-0.properties':
     ensure => 'file',
     source => '/vagrant/conf/server-0.properties'
   } ->
-  file{'/home/vagrant/kafka_2.11-2.0.0/config/server-1.properties':
+  file{'/home/vagrant/kafka_2.11-2.1.1/config/server-1.properties':
     ensure => 'file',
     source => '/vagrant/conf/server-1.properties'
   }
